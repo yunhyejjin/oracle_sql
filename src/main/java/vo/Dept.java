@@ -1,6 +1,6 @@
 package vo;
 
-// VO(Value Object) > DTO(Data Transfer Object). DOmain
+// VO(Value Object) > DTO(Data Transfer Object). Domain
 
 public class Dept {
 	public int deptNo;
