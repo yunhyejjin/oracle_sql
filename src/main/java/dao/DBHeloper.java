@@ -5,7 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Properties;
 
-public class DBHelper {
+public class DBHeloper {
 	public static <FileResder> Connection getConnection() throws Exception {
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 		Connection conn = null;
@@ -23,7 +23,7 @@ public class DBHelper {
 	
 	// getConnection() 메서드 디버깅용 테스트 코드
 		public static void main(String[] args) throws Exception {
-			Connection conn = DBHelper.getConnection();
+			Connection conn = DBHeloper.getConnection();
 			System.out.println(conn);
 	}
 }
