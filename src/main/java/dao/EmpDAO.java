@@ -9,6 +9,45 @@ import java.util.HashMap;
 import vo.Emp;
 
 public class EmpDAO {
+	// q005OrderBy.jsp
+	public static ArrayList<Emp> selectEmpListSort(String col, String sort)throws Exception{
+		
+		//매개값 디버깅
+		System.out.println("EmpDAO.selectEmpListSort.param col : " + col);
+		System.out.println("EmpDAO.selectEmpListSort.param sort : " + sort);
+		
+		ArrayList<Emp> list = new ArrayList<>();
+		Connection conn = DBHeloper.getConnection();
+		/*
+		 동적쿼리(쿼리문자열이 매개값에 분기되어 차이가 나는 경우
+		 없다
+		 empno asc
+		 empno desc
+		 ename asc
+		 ename desc 
+		*/
+		String sql = "select empno, ename"
+				+ " from emp";
+		
+		if(col != null && sort != null) {
+			sql = sql + " order by " + col + " " + sort;
+		}
+		
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		System.out.println(stmt);
+		
+		ResultSet rs = stmt.executeQuery();
+		while(rs.next()) {
+			Emp e = new Emp();
+			e.setEmpNo(rs.getInt("empno"));
+			e.setEname(rs.getString("ename"));
+			list.add(e);
+		}
+		
+		conn.close();
+		return list;	
+		
+	}
 	// q004WereIn.jsp
 	public static ArrayList<Emp> selectEmpListByGrade(ArrayList<Integer> ckList) throws Exception{
 		ArrayList<Emp> list = new ArrayList<>();
